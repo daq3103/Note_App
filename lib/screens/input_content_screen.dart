@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/note.dart';
-import 'package:flutter_application_1/riverpod/note_riverpod.dart';
-import 'package:flutter_application_1/riverpod/notes_riverpod.dart';
-import 'package:flutter_application_1/riverpod/theme_manager.dart';
+import 'package:flutter_application_1/riverpod/note/note_riverpod.dart';
+import 'package:flutter_application_1/riverpod/note/notes_riverpod.dart';
+import 'package:flutter_application_1/riverpod/note/theme_manager.dart';
 import 'package:flutter_application_1/widgets/widget_content_note.dart/NewLine_TextFormField.dart';
 import 'package:flutter_application_1/widgets/widget_content_note.dart/add_icon.dart';
 import 'package:flutter_application_1/widgets/widget_content_note.dart/appbar_content.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter_application_1/models/note.dart';
-import 'package:flutter_application_1/riverpod/note_db.dart';
+import 'package:flutter_application_1/riverpod/note/note_db.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class NoteListNotifier extends StateNotifier<List<Note>> {

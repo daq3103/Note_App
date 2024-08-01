@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/riverpod/notes_riverpod.dart';
+import 'package:flutter_application_1/riverpod/note/notes_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ContainerAddNote extends ConsumerWidget {
@@ -23,10 +23,7 @@ class ContainerAddNote extends ConsumerWidget {
         children: [
           IconButton(
             onPressed: () {          
-              Navigator.pushNamed(context, '/contentScreen').then((val) {
-
-               // ref.read(noteListNotifierProvider.notifier).getLstNote();
-              });
+              Navigator.pushNamed(context, '/contentScreen');
             },
             icon: const Icon(Icons.add_circle_outline),
           ),

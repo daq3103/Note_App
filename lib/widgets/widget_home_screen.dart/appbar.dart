@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/riverpod/theme_manager.dart';
+import 'package:flutter_application_1/riverpod/note/theme_manager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AppBarHomeSreen extends ConsumerWidget implements PreferredSizeWidget  {

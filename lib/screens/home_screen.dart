@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/riverpod/custom_animation.dart';
-import 'package:flutter_application_1/riverpod/note_riverpod.dart';
-import 'package:flutter_application_1/riverpod/notes_riverpod.dart';
-import 'package:flutter_application_1/riverpod/theme_manager.dart';
+import 'package:flutter_application_1/riverpod/note/custom_animation.dart';
+import 'package:flutter_application_1/riverpod/note/note_riverpod.dart';
+import 'package:flutter_application_1/riverpod/note/notes_riverpod.dart';
+import 'package:flutter_application_1/riverpod/note/theme_manager.dart';
 import 'package:flutter_application_1/screens/update_note_screen.dart';
 import 'package:flutter_application_1/widgets/widget_home_screen.dart/add_container.dart';
 import 'package:flutter_application_1/widgets/widget_home_screen.dart/appbar.dart';
