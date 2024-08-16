@@ -1,13 +1,13 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/models/note.dart';
-import 'package:flutter_application_1/riverpod/note/note_riverpod.dart';
-import 'package:flutter_application_1/riverpod/note/notes_riverpod.dart';
-import 'package:flutter_application_1/riverpod/note/theme_manager.dart';
-import 'package:flutter_application_1/widgets/widget_content_note.dart/NewLine_TextFormField.dart';
-import 'package:flutter_application_1/widgets/widget_content_note.dart/add_icon.dart';
-import 'package:flutter_application_1/widgets/widget_content_note.dart/appbar_content.dart';
-import 'package:flutter_application_1/widgets/widget_content_note.dart/bottom_navigation.dart';
+import 'package:note_app/models/note.dart';
+import 'package:note_app/riverpod/note/note_riverpod.dart';
+import 'package:note_app/riverpod/note/notes_riverpod.dart';
+import 'package:note_app/riverpod/note/theme_manager.dart';
+import 'package:note_app/widgets/widget_content_note/NewLine_TextFormField.dart';
+import 'package:note_app/widgets/widget_content_note/add_icon.dart';
+import 'package:note_app/widgets/widget_content_note/appbar_content.dart';
+import 'package:note_app/widgets/widget_content_note/bottom_navigation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -15,6 +15,7 @@ class ContentScreen extends HookConsumerWidget {
   ContentScreen({super.key});
   final _formKey = GlobalKey<FormState>();
   final FocusNode _titleFocusNode = FocusNode();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final getTheme = ref.watch(themeNotifierProvider);
@@ -22,7 +23,8 @@ class ContentScreen extends HookConsumerWidget {
     final contentController = useTextEditingController();
     final getNote = ref.watch(noteNotifierProvider);
     final listNewLineText = useState<List<TextEditingController>>([]);
-// add new line
+
+    // add new line
     void addNewLine() {
       listNewLineText.value = [
         ...listNewLineText.value,
@@ -31,12 +33,17 @@ class ContentScreen extends HookConsumerWidget {
     }
 
     useEffect(() {
+      if (getNote?.link != null) {
+        // neu co link thi xoa link
+        getNote?.link = null;
+      }
       // neu co anh thi xoa anh khi khởi tạo màn hình
       if (getNote?.image != null) {
         getNote?.image = null;
       }
       return null;
     }, []);
+
     return Scaffold(
       appBar: const AppBarContent(),
       body: SingleChildScrollView(
@@ -47,7 +54,7 @@ class ContentScreen extends HookConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-// title TextFormField
+                // title TextFormField
                 Padding(
                   padding: const EdgeInsets.only(bottom: 24),
                   child: TextFormField(
@@ -68,7 +75,7 @@ class ContentScreen extends HookConsumerWidget {
                     minLines: 1,
                   ),
                 ),
-// content TextFormField
+                // content TextFormField
                 Padding(
                   padding: const EdgeInsets.only(bottom: 86),
                   child: TextFormField(
@@ -88,7 +95,7 @@ class ContentScreen extends HookConsumerWidget {
                     minLines: 1,
                   ),
                 ),
-// new line TextFormField
+                // new line TextFormField
                 Padding(
                   padding: const EdgeInsets.only(bottom: 24),
                   child: Column(
@@ -105,15 +112,14 @@ class ContentScreen extends HookConsumerWidget {
                     ],
                   ),
                 ),
-// hiển thị ảnh đã chọn
-                getNote?.image != null
+                // hiển thị ảnh đã chọn
+                getNote?.image != null 
                     ? Image.file(
                         File(getNote!.image!),
                         height: 200,
                         width: double.infinity,
                       )
-                    : Container(),
-// hiển thị link nếu có
+                     : Container(),
                 // hiển thị link nếu có
                 getNote?.link != null
                     ? Row(
@@ -148,18 +154,17 @@ class ContentScreen extends HookConsumerWidget {
                         ],
                       )
                     : Container(),
-
-// Button add
+                // Button add
                 Column(
                   children: [
-// add new line
+                    // add new line
                     AddIcon(
                       addText: 'Add a new line',
                       onPressed: (context, notifier) {
                         addNewLine();
                       },
                     ),
-// add new link
+                    // add new link
                     AddIcon(
                         addText: 'Add a link',
                         onPressed: (context, notifier) {
@@ -167,7 +172,7 @@ class ContentScreen extends HookConsumerWidget {
                               .read(noteNotifierProvider.notifier)
                               .showTextInputDialog(context);
                         }),
-// add picture
+                    // add picture
                     AddIcon(
                       addText: 'Add a featured photo',
                       onPressed: (context, notifier) {
@@ -190,7 +195,7 @@ class ContentScreen extends HookConsumerWidget {
           ),
         ),
       ),
-// Display Theme Icon, Save Icon
+      // Display Theme Icon, Save Icon
       bottomNavigationBar: BottomNavigation(
         onSave: () {
           if (_formKey.currentState!.validate()) {

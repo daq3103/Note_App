@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_application_1/models/note.dart';
+import 'package:note_app/models/note.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sqflite/sqflite.dart';
 // ignore: depend_on_referenced_packages

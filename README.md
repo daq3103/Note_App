@@ -1,4 +1,4 @@
-# flutter_application_1
+# Note_app
 
 A new Flutter project.
 
@@ -14,3 +14,13 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Troubleshooting
+
+### Check for Port Conflicts
+
+Ensure that the port `14981` is not being used by another application. You can use the following command in the terminal to check for port usage:
+
+#### Windows
+```sh
+netstat -ano | findstr :14981

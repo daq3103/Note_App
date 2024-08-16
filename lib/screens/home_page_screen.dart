@@ -1,19 +1,21 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/riverpod/note/custom_animation.dart';
-import 'package:flutter_application_1/riverpod/note/note_riverpod.dart';
-import 'package:flutter_application_1/riverpod/note/notes_riverpod.dart';
-import 'package:flutter_application_1/riverpod/note/theme_manager.dart';
-import 'package:flutter_application_1/screens/update_note_screen.dart';
-import 'package:flutter_application_1/widgets/widget_home_screen.dart/add_container.dart';
-import 'package:flutter_application_1/widgets/widget_home_screen.dart/appbar.dart';
-import 'package:flutter_application_1/widgets/widget_home_screen.dart/delete_note.dart';
+import 'package:note_app/riverpod/note/custom_animation.dart';
+import 'package:note_app/riverpod/note/note_riverpod.dart';
+import 'package:note_app/riverpod/note/notes_riverpod.dart';
+import 'package:note_app/riverpod/note/theme_manager.dart';
+import 'package:note_app/screens/update_note_screen.dart';
+import 'package:note_app/widgets/widget_home_screen/add_container.dart';
+import 'package:note_app/widgets/widget_home_screen/appbar.dart';
+import 'package:note_app/widgets/widget_home_screen/delete_note.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
+  
   @override
+  
   Widget build(BuildContext context, WidgetRef ref) {
     final getnotes = ref.watch(noteListNotifierProvider);
     final setnotes = ref.read(noteListNotifierProvider.notifier);
@@ -53,7 +55,6 @@ class HomePage extends ConsumerWidget {
                     ref.read(noteNotifierProvider.notifier).updateImagePath(selectNote.image?? '');
 // update link
                   ref.read(noteNotifierProvider.notifier).updateLink(note.link??'');
-                  // use custom animation
                   ref.read(customAnimationProvider.notifier).navigateWithCustomAnimation(
                     context,
                     DisPlayContentScreen(note: selectNote),

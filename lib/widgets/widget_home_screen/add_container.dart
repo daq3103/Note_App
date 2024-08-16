@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/riverpod/note/notes_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ContainerAddNote extends ConsumerWidget {

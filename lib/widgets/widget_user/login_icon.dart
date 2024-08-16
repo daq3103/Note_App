@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-class LoginForm extends HookWidget {
-  const LoginForm({
+class LoginIcon extends HookWidget {
+  const LoginIcon({
     super.key,
     required this.iconform,
     required this.hintTextForm,

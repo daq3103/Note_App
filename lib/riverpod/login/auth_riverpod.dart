@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 class AuthRiverpod extends StateNotifier<User?> {
   AuthRiverpod(this._firebaseAuth) : super(_firebaseAuth.currentUser) {
     _firebaseAuth.authStateChanges().listen((user) {
@@ -10,10 +12,16 @@ class AuthRiverpod extends StateNotifier<User?> {
     });
   }
   final FirebaseAuth _firebaseAuth;
-  static List<String> scopes = <String>[
-    'email',
-    'https://www.googleapis.com/auth/contacts.readonly',
-  ];
+  Future<void> saveLogin() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    try {
+      final idToken = await state!.getIdToken();
+      await prefs.setString('token', idToken.toString());
+    } catch (e) {
+      print('Error : $e');
+    }
+  }
+
   Future<void> signupwithEmail(
       String email, String password, String name) async {
     try {
@@ -31,18 +39,18 @@ class AuthRiverpod extends StateNotifier<User?> {
     }
   }
 
-  Future<UserCredential?> signIn(String email, String password) async {
+  Future<void> signIn(String email, String password) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
       final idToken = await state?.getIdToken();
       print(idToken);
+      saveLogin();
       print('Successfully signed in with email link!');
     } catch (e) {
       // ignore: avoid_print
       print('Error : $e');
     }
-    return null;
   }
 
   Future<UserCredential> signInWithGoogle() async {
@@ -62,10 +70,15 @@ class AuthRiverpod extends StateNotifier<User?> {
       idToken: googleAuth.idToken,
     );
     await FirebaseAuth.instance.signInWithCredential(credential);
+    saveLogin();
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
-// login with facebook
+  Future<void> signOut() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('token');
+  }
+
   Future<UserCredential> signInWithFacebook() async {
     // Trigger the sign-in flow
     final LoginResult loginResult = await FacebookAuth.instance.login();

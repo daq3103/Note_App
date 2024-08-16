@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:flutter_application_1/models/note.dart'; // Replace with actual import path
+import 'package:note_app/models/note.dart'; // Replace with actual import path
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -28,7 +28,6 @@ class NoteNotifier extends StateNotifier<Note?> {
     }
     return null;
   }
-
 // Function to launch Google search URL
   Future<void> launchUrlGoogle(String query) async {
     final Uri url = Uri.parse(query);

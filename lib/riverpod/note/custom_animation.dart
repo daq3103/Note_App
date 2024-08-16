@@ -25,5 +25,5 @@ class CustomAnimation extends StateNotifier<bool> {
   }
 }
 
-final customAnimationProvider =
+final customAnimationProvider = 
     StateNotifierProvider<CustomAnimation, bool>((ref) => CustomAnimation());

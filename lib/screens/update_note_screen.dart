@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/models/note.dart';
-import 'package:flutter_application_1/riverpod/note/note_riverpod.dart';
-import 'package:flutter_application_1/riverpod/note/notes_riverpod.dart';
-import 'package:flutter_application_1/riverpod/note/theme_manager.dart';
-import 'package:flutter_application_1/widgets/widget_content_note.dart/add_icon.dart';
-import 'package:flutter_application_1/widgets/widget_content_note.dart/bottom_navigation.dart';
+import 'package:note_app/models/note.dart';
+import 'package:note_app/riverpod/note/note_riverpod.dart';
+import 'package:note_app/riverpod/note/notes_riverpod.dart';
+import 'package:note_app/riverpod/note/theme_manager.dart';
+import 'package:note_app/widgets/widget_content_note/add_icon.dart';
+import 'package:note_app/widgets/widget_content_note/bottom_navigation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -154,24 +154,24 @@ class DisPlayContentScreen extends HookConsumerWidget {
                   ),
                 ),
 // display image if have
-                noteListen?.image != null
-                    ? Image.file(
-                        File(noteListen!.image!),
+                if(note.image != null)
+                     Image.file(
+                        File(note.image!),
                         width: double.infinity,
                         height: 180,
                         fit: BoxFit.cover,
-                      )
-                    : Container(),
+                      ),
+
 // display link
-                noteListen?.link != null
-                    ? InkWell(
+                if (note.link != null)
+                     InkWell(
                         onTap: () {
                           ref
                               .read(noteNotifierProvider.notifier)
                               .launchUrlGoogle(note.link.toString());
                         },
-                        child: Text(noteListen!.link.toString()))
-                    : Container(),
+                        child: Text(note.link.toString())),
+                   
 // Button add
                 Column(
                   children: [
