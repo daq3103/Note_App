@@ -127,21 +127,6 @@ class SaveUserNotifier extends StateNotifier<User?> {
       rethrow;
     }
   }
-  // Get user image from Firestore
-  Future<String?> getUserImage(String uid) async {
-    try {
-      DocumentSnapshot doc = await _firestore.collection("users").doc(uid).get();
-      if (doc.exists) {
-        return doc['image'] as String?;
-      } else {
-        print('User not found');
-        return null;
-      }
-    } catch (e) {
-      print('Error getting user image: $e');
-      return null;
-    }
-  }
 }
 
 final firebaseAuthProvider =

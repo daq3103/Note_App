@@ -47,8 +47,12 @@ class AppBarHomeSreen extends HookConsumerWidget
               child: CircleAvatar(
                 radius: 30,
                 backgroundImage: note?.photoURL != null
-                    ? NetworkImage(note!.photoURL.toString()) 
-                    : const AssetImage("assets/images/avt.png") as ImageProvider,
+                    ? NetworkImage(
+                        note!.photoURL.toString(),
+                      )
+                    : const AssetImage(
+                        "assets/images/avt.png",
+                      ) as ImageProvider,
               ),
             ),
           ],

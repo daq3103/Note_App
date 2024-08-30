@@ -50,8 +50,10 @@ class LoginScreen extends HookConsumerWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Padding(
-          padding: const EdgeInsets.only(top: 100, bottom: 30, right: 20, left: 20),
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          padding:
+              const EdgeInsets.only(top: 100, bottom: 30, right: 20, left: 20),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(register.value == false ? 'Log in' : 'Sign up',
                 style: getTheme.textTheme.titleLarge!.copyWith(fontSize: 32)),
             Opacity(
