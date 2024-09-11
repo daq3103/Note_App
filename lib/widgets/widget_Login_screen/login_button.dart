@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/screens/home_page_screen.dart';
 class LoginButton extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final ValueNotifier<bool> register;
@@ -33,27 +32,15 @@ class LoginButton extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12)),
               backgroundColor: const Color.fromARGB(255, 93, 172, 236)),
           onPressed: () async {
+            // hàm xử lý login và register
             if (formKey.currentState!.validate()) {
               isLoading.value = true;
               if (register.value) {
-                await auth
-                    .signupwithEmail(
-                        controllerEmail.text,
-                        controllerPassword.text,
-                        controllerName.text)
-                    .then((val) {
-                  register.value = false;
-                });
+                await auth.signupwithEmail(
+                    controllerEmail.text, controllerPassword.text, controllerName.text);
+              register.value = false;
               } else {
-                await auth
-                    .signIn(controllerEmail.text, controllerPassword.text)
-                    .then((onValue) {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const HomePage()),
-                  );
-                });
+                await auth.signIn(controllerEmail.text, controllerPassword.text);
               }
               isLoading.value = false;
             }

@@ -52,27 +52,26 @@ class AuthRiverpod extends StateNotifier<User?> {
       print('Error : $e');
     }
   }
-
   Future<UserCredential> signInWithGoogle() async {
-    // Trigger the authentication flow
+  try {
     final GoogleSignIn googleSignIn = GoogleSignIn();
     await googleSignIn.signOut();
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
     if (googleUser == null) {
       return Future.error('Đăng nhập bị hủy bỏ');
     }
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
-    // Create a new credential
+    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
-    await FirebaseAuth.instance.signInWithCredential(credential);
-    saveLogin();
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    return await _firebaseAuth.signInWithCredential(credential);
+  } catch (e) {
+    print('Error during Google Sign-In: $e');
+    return Future.error('Đã xảy ra lỗi khi đăng nhập bằng Google. Vui lòng kiểm tra kết nối mạng của bạn và thử lại.');
   }
+}
+
 
   Future<void> signOut() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
